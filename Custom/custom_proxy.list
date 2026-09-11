@@ -1,7 +1,17 @@
 # 自定义临时规则 — 走代理(🚀优选线路)
 # 手工维护, convert_qx_rules.py 不会覆盖本文件; 本文件优先级高于一切远程规则
-# 可用行类型(classical): DOMAIN-SUFFIX / DOMAIN / DOMAIN-KEYWORD / DOMAIN-WILDCARD / IP-CIDR / IP-CIDR6 / IP-ASN
-# 示例(去掉行首 # 即生效):
-#   DOMAIN-SUFFIX,example.com
-#   DOMAIN-KEYWORD,openai
-#   IP-CIDR,1.2.3.0/24,no-resolve
+# ⚠️ mihomo 规则文件不支持行内注释, 注释必须独立成行(行首 #)
+#
+# ── 以下是真实生效的规则, 覆盖常用类型, 照着写即可; 不想要就删除该行或行首加 # ──
+
+# 后缀匹配: pastebin.com 及其所有子域
+DOMAIN-SUFFIX,pastebin.com
+
+# 关键词匹配: 域名任意位置含 sci-hub 即命中
+DOMAIN-KEYWORD,sci-hub
+
+# 通配符: * 匹配任意长度, 此条命中所有 xxx.workers.dev
+DOMAIN-WILDCARD,*.workers.dev
+
+# 精确 IP: no-resolve = 不做 DNS 解析、直接比对连接目标 IP
+IP-CIDR,8.8.8.8/32,no-resolve
