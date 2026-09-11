@@ -1,0 +1,6 @@
+# 自定义临时规则 — 直连(DIRECT)
+# 手工维护, convert_qx_rules.py 不会覆盖本文件; 本文件优先级高于一切远程规则
+# 可用行类型(classical): DOMAIN-SUFFIX / DOMAIN / DOMAIN-KEYWORD / DOMAIN-WILDCARD / IP-CIDR / IP-CIDR6 / IP-ASN
+# 示例(去掉行首 # 即生效):
+#   DOMAIN-SUFFIX,example.com
+#   IP-CIDR,192.168.1.0/24,no-resolve
