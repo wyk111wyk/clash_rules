@@ -3,3 +3,29 @@ DOMAIN-KEYWORD,generativelanguage
 DOMAIN-KEYWORD,openai
 IP-CIDR,24.199.123.28/32
 IP-CIDR,64.23.132.171/32
+# ── Google 网段兜底 ──
+# 背景: Anti-Gravity / Gemini 等存在「裸 IP 连接」(如 172.217.117.4:443), 该连接没有
+# 域名, 域名规则看不到它, 会一路落到 GEOIP,CN 之后的 MATCH 兜底组(🚀优选线路=优先香港),
+# 于是被 Google 判定「地点不正确」。这里用 IP-CIDR 把 Google 自有网段兜到 🤖境外LLM。
+# 来源: Google 官方 IP 段 https://www.gstatic.com/ipranges/goog.json (IPv4 核心服务段)。
+# 范围: 仅 Google 自有服务网段; 不含 GCP 客户网段(34.x/35.x), 避免误伤其它托管在
+#       GCP 上的服务。
+# 语义: no-resolve = 不做域名反查, 只匹配已是真实 IP 的连接; 域名连接照旧由
+#       llm_ai_domain.list 决定, 二者互不干扰(与 CustomDirect 的写法保持一致)。
+IP-CIDR,8.8.4.0/24,no-resolve
+IP-CIDR,8.8.8.0/24,no-resolve
+IP-CIDR,64.233.160.0/19,no-resolve
+IP-CIDR,66.102.0.0/20,no-resolve
+IP-CIDR,66.249.64.0/19,no-resolve
+IP-CIDR,72.14.192.0/18,no-resolve
+IP-CIDR,74.125.0.0/16,no-resolve
+IP-CIDR,108.177.0.0/17,no-resolve
+IP-CIDR,142.250.0.0/15,no-resolve
+IP-CIDR,172.217.0.0/16,no-resolve
+IP-CIDR,172.253.0.0/16,no-resolve
+IP-CIDR,173.194.0.0/16,no-resolve
+IP-CIDR,192.178.0.0/15,no-resolve
+IP-CIDR,207.223.160.0/20,no-resolve
+IP-CIDR,209.85.128.0/17,no-resolve
+IP-CIDR,216.58.192.0/19,no-resolve
+IP-CIDR,216.239.32.0/19,no-resolve
