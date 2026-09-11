@@ -1,0 +1,6 @@
+# macOS 元数据
+.DS_Store
+**/.DS_Store
+
+# WorkBuddy 项目数据（不进规则仓库）
+.workbuddy/
