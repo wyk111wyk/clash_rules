@@ -132,3 +132,10 @@ openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
 openaicomproductionae4b.blob.core.windows.net
 production-openaicom-storage.azureedge.net
 servd-anthropic-website.b-cdn.net
+# ── Google AI 工具配套基础设施(Anti-Gravity / Gemini / Cloud Code 等) ──
+# 这些域名此前仅命中 Global 大列表 -> 🚀优选线路(默认优先香港节点); 而 Google 的
+# LLM/API/存储/图片通道会拒绝香港节点, 导致连接被 close。改挂 🤖境外LLM
+# (优先 日本/新加坡/美国, Google 接受), 且 LLM_AI 规则排在 Global 之前, 优先命中。
+# 广告域(androidtv/firebase/ogads 等)仍由 AdBlock 在前拦截, 不受影响。
++.googleapis.com
++.googleusercontent.com
