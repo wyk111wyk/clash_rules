@@ -194,6 +194,44 @@ curl -s https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geos
 
 ---
 
+## 12. 路由「正确」但连接被掐断（EOF / 随机超时）怎么查
+
+典型现象：AI 工具（Antigravity / Codex / Claude Code 等）报 `request failed ... EOF`，或连接随机失败；**但规则本身是对的**。此时不要去改规则，按下面顺序定位：
+
+**第 1 步：先证明路由是对的**（抓内核日志）
+
+```bash
+B=http://127.0.0.1:9090
+curl -s --compressed -N "$B/logs?level=debug" --max-time 20 > /tmp/l.log 2>&1 &
+# 同时触发一次请求，然后看命中
+grep -a "match RuleSet" /tmp/l.log | tail -20
+# 形如：[TCP] ... -> daily-cloudcode-pa.googleapis.com:443 match RuleSet(LLM_AI_dom) using 🤖境外LLM[🇺🇸 US 02]
+```
+
+**第 2 步：区分「规则问题」还是「链路/节点问题」** —— 用代理端口做端到端 A/B（同一节点下，对比"Google 系"与"非 Google 系"目标）：
+
+```bash
+curl -sS -o /dev/null -x http://127.0.0.1:7890 --max-time 8 -w "%{http_code}\n" https://daily-cloudcode-pa.googleapis.com/
+curl -sS -o /dev/null -x http://127.0.0.1:7890 --max-time 8 -w "%{http_code}\n" https://openrouter.ai/
+# 一个通一个不通 → 是"节点到该目标的链路"问题，不是规则问题
+```
+
+**第 3 步：节点 A/B**（`🤖境外LLM` 是 select 组，可用 API 切换后实测，测完还原）：
+
+```bash
+# 切换：PUT /proxies/<组名> {"name":"<子组>"}（组名需 URL 编码，emoji 亦然）
+# 然后重复第 2 步若干次，统计成功率
+```
+
+**实战结论（本仓库实测，2026-09）**：同一个机场，不同地区出口 IP 对 Google 的可用性差异极大 —— 目标 `daily-cloudcode-pa.googleapis.com`，累计成功率 US 3/10→12/12 剧烈波动、JP 2/6、**SG 43/46 最稳**、`🛰家宽兜底` **0/8（该组节点是死的）**。**遇到 Google 系间歇性 EOF，第一动作是换节点，而不是改规则。**
+
+**两个坑（都实测踩过）**：
+
+- **无代理的 `curl` 仍会被 TUN 捕获**（日志里源地址是 `198.18.0.1`），所以"直连测试成功"是假象，不能据此判断"直连可用"。
+- **TUN + `fake-ip`** 是社区已知会影响 `*.googleapis.com` 访问的组合（表现为 Antigravity 登录/流式请求 EOF）。备选缓解：把相关域加进 `dns.fake-ip-filter`，或把 `dns.enhanced-mode` 改为 `redir-host`。改动属 **config.yaml 的 `dns:` 段**（不是规则列表），且注意国内 `nameserver` 解析 Google 域可能给出劣质 IP，需配合 `nameserver-policy` 才稳妥。
+
+---
+
 ## 附录：快照命令（§6.1 实验与日常体检通用）
 
 ```bash
