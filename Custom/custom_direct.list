@@ -32,3 +32,6 @@ DOMAIN-SUFFIX,steamstatic.com
 DOMAIN-SUFFIX,steampipe.akamaized.net
 DOMAIN-SUFFIX,steampipe-kr.akamaized.net
 DOMAIN-SUFFIX,steampipe-partner.akamaized.net
+
+# Apple Xcode 下载渠道
+DOMAIN-SUFFIX,updates.cdn-apple.com
