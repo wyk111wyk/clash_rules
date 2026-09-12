@@ -25,7 +25,6 @@
 |---|---|---|
 | **策略源头** | 本仓库的 `*.list` 文件 | 手工维护，**唯一真相** |
 | 主配置 | 私有仓库 `clash-config/config.yaml` | 含订阅 token，靠 PAT 导入 URL |
-| 生成工具 | `clash-config/convert_qx_rules.py` | QX 列表 → mihomo 转换器（现仅托管，不再迭代） |
 | 客户端规则数据 | provider 本地缓存 | **`type: file`，带 sha256 校验** |
 
 **关键事实（实测）**：客户端运行时把**全部** rule-provider 都当 **`type: file`** 加载，**没有一条是 `type: http`** —— **运行时不联网去拉规则仓库**。
