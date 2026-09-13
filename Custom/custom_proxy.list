@@ -15,3 +15,139 @@ DOMAIN-WILDCARD,*.workers.dev
 
 # 精确 IP: no-resolve = 不做 DNS 解析、直接比对连接目标 IP
 IP-CIDR,8.8.8.8/32,no-resolve
+
+# ══════════════════════════════════════════════════════════════════════
+# 中国台湾地区站点 · 2026-09-13 实测收录 (统一走🚀优选线路)
+#
+# 收录口径: HTTPS 经代理实测可达(200/202/302; 403 为 Cloudflare 拦脚本, 非站点不可达)
+#
+# 未收录(勿当漏项):
+#   · 15 个「两种出口都不通」, 待人工在浏览器复核:
+#       twse.com.tw / tpex.org.tw / cbc.gov.tw / dgbas.gov.tw / cwa.gov.tw /
+#       railway.gov.tw / thsrc.com.tw / books.com.tw / eslite.com /
+#       businessweekly.com.tw / pts.org.tw / rti.org.tw / bcc.com.tw /
+#       gamebase.com.tw / goodinfo.tw
+#   · storm.mg(风传媒) —— 其 track.storm.mg 已在 AdBlockCore 被拦截, 而本表排在
+#       AdBlock 之前, 收录会绕过拦截; 它已由 Global_dom 走🚀优选线路, 无需重复
+#
+# ⚠️ 出口敏感: 下列站点经「🇸🇬新加坡出口」会被拦(403 / 连不上), 换「台湾出口」即正常 ——
+#       chinatimes.com / gamer.com.tw / pixnet.net / wantgoo.com /
+#       kktv.me / litv.tv / myvideo.net.tw
+#    本表统一走🚀优选线路(当前=新加坡线路); 若日后要精确处理, 需另建台湾出口
+#    策略组, 把这 7 条拆过去。反例: shopee.tw 在新加坡出口正常、台湾出口失败,
+#    说明不能一刀切「台湾站点一律走台湾出口」。
+# ══════════════════════════════════════════════════════════════════════
+
+# ── 新闻/媒体 ──
+# 聯合新聞網
+DOMAIN-SUFFIX,udn.com
+# 自由時報
+DOMAIN-SUFFIX,ltn.com.tw
+# 中時新聞網 (出口敏感: 新加坡 403)
+DOMAIN-SUFFIX,chinatimes.com
+# 中央通訊社
+DOMAIN-SUFFIX,cna.com.tw
+# ETtoday 新聞雲
+DOMAIN-SUFFIX,ettoday.net
+# 三立新聞網
+DOMAIN-SUFFIX,setn.com
+# TVBS 新聞網
+DOMAIN-SUFFIX,tvbs.com.tw
+# NOWnews 今日新聞
+DOMAIN-SUFFIX,nownews.com
+# 東森新聞
+DOMAIN-SUFFIX,ebc.net.tw
+# 民視新聞網
+DOMAIN-SUFFIX,ftvnews.com.tw
+# 關鍵評論網
+DOMAIN-SUFFIX,thenewslens.com
+# 鏡週刊
+DOMAIN-SUFFIX,mirrormedia.mg
+# 上報
+DOMAIN-SUFFIX,upmedia.mg
+# 新頭殼
+DOMAIN-SUFFIX,newtalk.tw
+# 報導者
+DOMAIN-SUFFIX,twreporter.org
+
+# ── 杂志/知识 ──
+# 天下雜誌
+DOMAIN-SUFFIX,cw.com.tw
+# 數位時代
+DOMAIN-SUFFIX,bnext.com.tw
+# TechNews 科技新報
+DOMAIN-SUFFIX,technews.tw
+# INSIDE
+DOMAIN-SUFFIX,inside.com.tw
+# 財訊
+DOMAIN-SUFFIX,wealth.com.tw
+# 康健雜誌
+DOMAIN-SUFFIX,commonhealth.com.tw
+# 方格子 (內容創作平台)
+DOMAIN-SUFFIX,vocus.cc
+
+# ── 论坛/社群 ──
+# 批踢踢實業坊 PTT
+DOMAIN-SUFFIX,ptt.cc
+# Dcard
+DOMAIN-SUFFIX,dcard.tw
+# Mobile01
+DOMAIN-SUFFIX,mobile01.com
+# 巴哈姆特電玩資訊站 (出口敏感)
+DOMAIN-SUFFIX,gamer.com.tw
+# 痞客邦 PIXNET (出口敏感)
+DOMAIN-SUFFIX,pixnet.net
+# 卡提諾論壇
+DOMAIN-SUFFIX,ck101.com
+# 伊莉討論區
+DOMAIN-SUFFIX,eyny.com
+# 背包客棧
+DOMAIN-SUFFIX,backpackers.com.tw
+# 小老婆汽機車資訊網
+DOMAIN-SUFFIX,jorsindo.com
+# 癮科技 Cool3C
+DOMAIN-SUFFIX,cool3c.com
+
+# ── 财经/投资 ──
+# 鉅亨網
+DOMAIN-SUFFIX,cnyes.com
+# 玩股網 (出口敏感)
+DOMAIN-SUFFIX,wantgoo.com
+# CMoney 投資網誌
+DOMAIN-SUFFIX,cmoney.tw
+# 財報狗
+DOMAIN-SUFFIX,statementdog.com
+# 富果 Fugle
+DOMAIN-SUFFIX,fugle.tw
+# 聚財網
+DOMAIN-SUFFIX,wearn.com
+# 公開資訊觀測站 (台股公告原始数据源)
+DOMAIN-SUFFIX,mops.twse.com.tw
+
+# ── 影音/串流 ──
+# KKTV (出口敏感)
+DOMAIN-SUFFIX,kktv.me
+# LiTV 線上影視 (出口敏感)
+DOMAIN-SUFFIX,litv.tv
+# myVideo (出口敏感)
+DOMAIN-SUFFIX,myvideo.net.tw
+# CATCHPLAY+
+DOMAIN-SUFFIX,catchplay.com
+# friDay 影音
+DOMAIN-SUFFIX,friday.tw
+
+# ── 生活/电商/服务 ──
+# 蝦皮購物 (反例: 新加坡出口正常, 台湾出口失败)
+DOMAIN-SUFFIX,shopee.tw
+# 露天拍賣
+DOMAIN-SUFFIX,ruten.com.tw
+# momo 購物網
+DOMAIN-SUFFIX,momoshop.com.tw
+# PChome 線上購物
+DOMAIN-SUFFIX,pchome.com.tw
+# 591 房屋交易
+DOMAIN-SUFFIX,591.com.tw
+# 104 人力銀行
+DOMAIN-SUFFIX,104.com.tw
+# KKBOX
+DOMAIN-SUFFIX,kkbox.com
