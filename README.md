@@ -14,4 +14,5 @@
 - `Policy/` 分流列表，按类别分目录：AI / Apple / Game / Tool / CN / Global
   （*_domain.list 为 domain 行为，*_classical.list 为 classical 行为）
 - 行格式为 mihomo 规则文件原生格式，策略由引用方 config 的 RULE-SET 行决定
-- 维护方式：直接编辑对应 `*.list` 并推送；客户端**删除 profile → 从同一链接重新添加**方生效（详见 `DEBUGGING.md`）
+- 维护方式：直接编辑对应 `*.list` 并推送；客户端**刷新 provider**（改了哪条刷哪条，或「刷新全部 provider」）即生效，
+  **Hako 1.0.8 起无需再删除 profile 重新添加**（详见 `DEBUGGING.md` §2.1、§6）
